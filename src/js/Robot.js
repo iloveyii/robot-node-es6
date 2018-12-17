@@ -93,7 +93,6 @@ export default class Robot {
             // Cannot send out of grid
             y = (y < this.robotConfig.yMin) ? this.robotConfig.yMin : y;
             y = (y > this.robotConfig.yMax) ? this.robotConfig.yMax : y;
-            this.currentCoordinates.y = y;
         }
 
         if (compassAxis.axis === 'X') {
@@ -101,7 +100,6 @@ export default class Robot {
             // Cannot send out of grid
             x = ( x < this.robotConfig.xMin) ? this.robotConfig.xMin : x;
             x = ( x > this.robotConfig.xMax) ? this.robotConfig.xMax : x;
-            this.currentCoordinates.x = x;
         }
 
         if(this.debug) {
