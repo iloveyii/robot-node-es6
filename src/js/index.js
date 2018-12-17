@@ -87,6 +87,11 @@ runRobot('1 2', [
     'S 1',
     'E 2',
     'N 2',
+    'W 1',
+    'W 3',
+    'N 3',
+    'E 2',
+    'S 6'
 ], robotConfig, DEBUG);
 /*
 process.stdin.resume();

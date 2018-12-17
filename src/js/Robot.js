@@ -64,7 +64,7 @@ export default class Robot {
                     }
                 }
             } else {
-                for (let i = this.currentCoordinates.x; i <= this.previousCoordinates.x; i++) {
+                for (let i = this.previousCoordinates.x; i >= this.currentCoordinates.x; i--) {
                     const visited = 'x'+i + 'y'+this.currentCoordinates.y;
                     if( ! this.traversed.includes(visited)) {
                         this.traversed.push(visited);
@@ -83,7 +83,7 @@ export default class Robot {
                     }
                 }
             } else {
-                for (let i = this.currentCoordinates.y; i <= this.previousCoordinates.y; i++) {
+                for (let i = this.previousCoordinates.y; i >= this.currentCoordinates.y; i--) {
                     const visited= 'x'+this.currentCoordinates.x+'y'+i;
                     if( ! this.traversed.includes(visited)) {
                         this.traversed.push(visited);
