@@ -29,9 +29,7 @@ export default class Compass {
          * @param poleDirection
          * @returns {*}
          */
-        this.mapPoleToAxis = function (poleDirection) {
-            return this[poleDirection.toLowerCase()];
-        }
+        this.mapPoleToAxis = this.mapPoleToAxis.bind(this);
     }
 
     print() {
@@ -40,5 +38,9 @@ export default class Compass {
         console.log(this.w);
         console.log(this.s);
         console.log(this.n);
+    }
+
+    mapPoleToAxis(poleDirection) {
+        return this[poleDirection.toLowerCase()];
     }
 }
