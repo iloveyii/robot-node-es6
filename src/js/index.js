@@ -1,8 +1,3 @@
-
-
-
-
-
 import Compass from './Compass';
 import Command from './Command';
 import Coordinates from './Coordinates';
@@ -58,6 +53,7 @@ function runRobot(initialXY, commands, DEBUG) {
 const DEBUG = false;
 
 /*
+// Run without stdin
 runRobot(11, 12, [
     'E 2',
     'N 1',
@@ -71,16 +67,55 @@ runRobot(11, 12, [
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
-var input = new Array();
-var counter = 0;
+let input = new Array();
+let counter = 0;
+
 process.stdin.on('data', function (data) {
     input.push(data.toString().trim());
+
+    // Check number of commands
+    if(counter === 0) {
+        const numberOfCommands = Number(input[0]);
+        if(numberOfCommands < 0 || numberOfCommands > 10000) {
+            console.log('Number of commands should be between 0 and 10000 (inc)');
+            process.exit();
+        }
+    }
+
+    // Check x y coordinates
+    if(counter === 1) {
+        const xy = input[1].split(' ');
+        const x = Number(xy[0]);
+        const y = Number(xy[1]);
+        if( (x > 100000 || x < -100000) || (y > 100000 || y < -100000) ) {
+            console.log('Value of x and y should be between -100000 and 100000 (inc)');
+            process.exit();
+        }
+    }
+
+    // Check commands
+    if(counter > 1) {
+        const cmd = input[counter].split(' ');
+        const direction = cmd[0];
+        if( ! ['E', 'W', 'S', 'N'].includes(direction)) {
+            console.log('Direction of the command should by among: ', ['E', 'W', 'S', 'N']);
+            process.exit();
+        }
+        const steps = Number(cmd[1]);
+        if( steps <= 0 || steps >= 100000 ) {
+            console.log('Value of steps in a the command should be between 0 and 100000');
+            process.exit();
+        }
+    }
+
     counter++;
+
+    // Finished commands ? Run robot
     if( counter > ( Number(input[0]) +  1) ) {
         if(DEBUG) {
             console.log(input);
         }
-        const initialCoordinates = (input[1]).toString().trim();
+        const initialCoordinates = input[1];
         const commands = input.slice(2);
         runRobot(initialCoordinates, commands, DEBUG);
         process.exit();
