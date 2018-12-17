@@ -4,45 +4,53 @@ import Coordinates from './Coordinates';
 import Robot from './Robot';
 
 
-/**
- * We need a compass to tell the Robot
- * which pole direction corresponds to which axis
- * @type {Compass}
- */
-const compass = new Compass();
+function runRobot(initialX, initialY, commands, DEBUG) {
+    /**
+     * We need a compass to tell the Robot
+     * which pole direction corresponds to which axis
+     * @type {Compass}
+     */
+    const compass = new Compass();
 
-/**
- * We also need the initial coordinates of the Robot
- * to start with
- * @type {Coordinates}
- */
-const startingCoord = new Coordinates(12, 10);
+    /**
+     * We also need the initial coordinates of the Robot
+     * to start with
+     * @type {Coordinates}
+     */
+    const startingCoord = new Coordinates(initialX, initialY);
 
-/**
- * Lets create our robot at the specified coordinates
- * and with the compass with hand
- * @type {Command}
- */
-const robot = new Robot(compass, startingCoord);
+    /**
+     * Lets create our robot at the specified coordinates
+     * and with the compass with hand
+     * @type {Command}
+     */
+    const robot = new Robot(compass, startingCoord, DEBUG);
 
-/**
- * But our Robot is static and standing the initial coordinates
- * Lets make it more by issuing a command or two
- * @type {Command}
- */
-const cmd1 = new Command('E', 2);
-robot.command(cmd1);
+    /**
+     * But our Robot is static and standing the initial coordinates
+     * Lets make it more by issuing a command or two
+     * @type {Command}
+     */
+    commands.forEach(function (cmdString) {
+        let cmdArray = cmdString.split(' ');
+        let cmd = new Command(cmdArray[0], Number(cmdArray[1]));
+        robot.command(cmd);
+    });
 
-const cmd2 = new Command('N', 1);
-robot.command(cmd2);
+    console.log('=> Cleaned: ' + robot.placesCleaned);
 
-const cmd3 = new Command('N', 2);
-robot.command(cmd3);
+    /**
+     * And finally lets see which coordinates the robot did traverse
+     */
+    if(DEBUG) {
+        robot.printTraversed();
+    }
+}
 
-console.log('=> Cleaned: ' + robot.placesCleaned);
 
-/**
- * And finally lets see which coordinates the robot did traverse
- */
-robot.printTraversed();
-
+const DEBUG = false;
+runRobot(11, 12, [
+    'E 2',
+    'N 1',
+    'N 2'
+], DEBUG);

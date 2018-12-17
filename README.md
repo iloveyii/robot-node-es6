@@ -35,7 +35,7 @@ Below is the directory structure of the source code:
 
 ## Requirements
    * The application has been tested with the following.
-   * Ubuntu 14.04, 17.04
+   * Ubuntu 14.04, 17.04, 17.10
    * Node v9.11.2
    * Npm 5.6.0
    

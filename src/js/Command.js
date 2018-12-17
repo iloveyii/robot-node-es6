@@ -11,7 +11,6 @@ export default class Command {
         this.print = this.print.bind(this);
     }
 
-
     print() {
         console.log('Command: ', this.direction, this.steps);
     }

@@ -11,9 +11,10 @@ import Coordinates from './Coordinates';
  * @constructor
  */
 export default class Robot {
-    constructor(compass, initialCoordinates) {
+    constructor(compass, initialCoordinates, DEBUG) {
         this.compass = compass;
         this.initialCoordinates = initialCoordinates;
+        this.debug = DEBUG;
 
         this.placesCleaned = 0;
         this.currentCoordinates = new Coordinates(initialCoordinates.x, initialCoordinates.y);
@@ -38,10 +39,15 @@ export default class Robot {
             this.currentCoordinates.x = (compassAxis.direction === '+') ? this.currentCoordinates.x + command.steps : this.currentCoordinates.x - command.steps;
         }
 
-        command.print();
+        if(this.debug) {
+            command.print();
+        }
+
         this.currentCoordinates = new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y);
         this.traversed.push(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y));
-        this.currentCoordinates.print();
+        if(this.debug) {
+            this.currentCoordinates.print();
+        }
     };
 
     printTraversed() {
