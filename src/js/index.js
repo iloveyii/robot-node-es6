@@ -4,7 +4,7 @@ import Coordinates from './Coordinates';
 import Robot from './Robot';
 
 
-function runRobot(initialXY, commands, DEBUG) {
+function runRobot(initialXY, commands, robotConfig, DEBUG) {
     /**
      * We need a compass to tell the Robot
      * which pole direction corresponds to which axis
@@ -27,7 +27,7 @@ function runRobot(initialXY, commands, DEBUG) {
      * and with the compass with hand
      * @type {Command}
      */
-    const robot = new Robot(compass, startingCoord, DEBUG);
+    const robot = new Robot(compass, startingCoord, robotConfig, DEBUG);
 
     /**
      * But our Robot is static and standing the initial coordinates
@@ -40,7 +40,7 @@ function runRobot(initialXY, commands, DEBUG) {
         robot.command(cmd);
     });
 
-    console.log('=> Cleaned: ' + robot.placesCleaned);
+    console.log('=> Cleaned: ' + robot.uniquePlacesCleaned);
 
     /**
      * And finally lets see which coordinates the robot did traverse
@@ -50,7 +50,7 @@ function runRobot(initialXY, commands, DEBUG) {
     }
 }
 
-const DEBUG = false;
+const DEBUG = true;
 
 /*
 // Run without stdin
@@ -63,12 +63,33 @@ runRobot(11, 12, [
     'E 2',
 ], DEBUG);
 */
+const robotConfig = {
+    xMin: -100000,
+    xMax: 100000,
+    yMin: -100000,
+    yMax: 100000
+};
 
+// Run without stdin
+runRobot('1 2', [
+    'S 4',
+    'N 1',
+    'N 4'
+], robotConfig, DEBUG);
+
+
+/*
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 let input = new Array();
 let counter = 0;
+const robotConfig = {
+    xMin: -100000,
+    xMax: 100000,
+    yMin: -100000,
+    yMax: 100000
+};
 
 process.stdin.on('data', function (data) {
     input.push(data.toString().trim());
@@ -117,7 +138,8 @@ process.stdin.on('data', function (data) {
         }
         const initialCoordinates = input[1];
         const commands = input.slice(2);
-        runRobot(initialCoordinates, commands, DEBUG);
+        runRobot(initialCoordinates, commands, robotConfig, DEBUG);
         process.exit();
     }
 });
+*/
