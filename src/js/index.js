@@ -69,7 +69,7 @@ process.stdin.setEncoding('utf8');
 
 let input = new Array();
 let counter = 0;
-const robotConfig = {
+export const robotConfig = {
     xMin: -100000,
     xMax: 100000,
     yMin: -100000,
