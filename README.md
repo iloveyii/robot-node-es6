@@ -9,6 +9,7 @@ This a small Robot application developed in Node, ES6, JS.
   * Run (inside root directory) npm install `npm install`.
   * To run the tests `npm run test`.
   * To run the Robot `npm run robot`.
+  * Once transpiled with the above command, it can be run directly like `node public/bundle.js`.
   
 ## Overall Structure
 
