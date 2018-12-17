@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "start": "webpack --watch & webpack-dev-server --open-page 'index.html'",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "node": "node public/bundle.js",
+    "robot": "npm run build && npm run node"
   },
   "keywords": [],
   "author": "",
