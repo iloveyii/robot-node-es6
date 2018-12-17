@@ -22,12 +22,17 @@ export default class Robot {
         this.currentCoordinates = new Coordinates(initialCoordinates.x, initialCoordinates.y);
         this.direction = 'E';
         this.traversed = [];
-        this.traversed.push(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y));
+        this.traversed.push('x'+this.currentCoordinates.x+'y'+this.currentCoordinates.y);
 
         this.command = this.command.bind(this);
         this.printTraversed = this.printTraversed.bind(this);
         this.addPlaceCleaned = this.addPlaceCleaned.bind(this);
         this.addTraversed = this.addTraversed.bind(this);
+        this.getUniquePlacesCleaned = this.getUniquePlacesCleaned.bind(this);
+    }
+
+    getUniquePlacesCleaned() {
+        return this.traversed.length;
     }
 
     addPlaceCleaned(currentCoordinate, command) {
@@ -53,11 +58,17 @@ export default class Robot {
         if(xDiff !== 0) {
             if(xDiff > 0) {
                 for (let i = this.previousCoordinates.x; i <= this.currentCoordinates.x; i++) {
-                    this.traversed.push( 'x'+i, 'y'+this.currentCoordinates.y);
+                    const visited = 'x'+i + 'y'+this.currentCoordinates.y;
+                    if( ! this.traversed.includes(visited)) {
+                        this.traversed.push(visited);
+                    }
                 }
             } else {
                 for (let i = this.currentCoordinates.x; i <= this.previousCoordinates.x; i++) {
-                    this.traversed.push( 'x'+i, 'y'+this.currentCoordinates.y);
+                    const visited = 'x'+i + 'y'+this.currentCoordinates.y;
+                    if( ! this.traversed.includes(visited)) {
+                        this.traversed.push(visited);
+                    }
                 }
             }
         }
@@ -66,31 +77,36 @@ export default class Robot {
         if(yDiff !== 0) {
             if(yDiff > 0) {
                 for (let i = this.previousCoordinates.y; i <= this.currentCoordinates.y; i++) {
-                    this.traversed.push(new Coordinates(this.currentCoordinates.x, i));
+                    const visited = 'x'+this.currentCoordinates.x+'y'+i;
+                    if( ! this.traversed.includes(visited)) {
+                        this.traversed.push(visited);
+                    }
                 }
             } else {
                 for (let i = this.currentCoordinates.y; i <= this.previousCoordinates.y; i++) {
-                    this.traversed.push(new Coordinates(this.currentCoordinates.x, i));
+                    const visited= 'x'+this.currentCoordinates.x+'y'+i;
+                    if( ! this.traversed.includes(visited)) {
+                        this.traversed.push(visited);
+                    }
                 }
             }
 
         }
-
-        console.log('x Diff ', this.currentCoordinates.x - this.previousCoordinates.x);
-        console.log('y Diff ', this.currentCoordinates.y - this.previousCoordinates.y);
-
-
     }
 
     command(command) {
         this.direction = command.direction;
         var compassAxis = this.compass.mapPoleToAxis(command.direction);
         this.previousCoordinates = new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y);
+        this.currentCoordinates.print();
         /**
          * Move Robot on the correct axis
          */
+        let x = this.currentCoordinates.x;
+        let y = this.currentCoordinates.y;
+
         if (compassAxis.axis === 'Y') {
-            let y = (compassAxis.direction === '+') ? this.currentCoordinates.y + command.steps : this.currentCoordinates.y - command.steps;
+            y = (compassAxis.direction === '+') ? this.currentCoordinates.y + command.steps : this.currentCoordinates.y - command.steps;
             // Cannot send out of grid
             y = (y < this.robotConfig.yMin) ? this.robotConfig.yMin : y;
             y = (y > this.robotConfig.yMax) ? this.robotConfig.yMax : y;
@@ -98,7 +114,7 @@ export default class Robot {
         }
 
         if (compassAxis.axis === 'X') {
-            let x = (compassAxis.direction === '+') ? this.currentCoordinates.x + command.steps : this.currentCoordinates.x - command.steps;
+            x = (compassAxis.direction === '+') ? this.currentCoordinates.x + command.steps : this.currentCoordinates.x - command.steps;
             // Cannot send out of grid
             x = ( x < this.robotConfig.xMin) ? this.robotConfig.xMin : x;
             x = ( x > this.robotConfig.xMax) ? this.robotConfig.xMax : x;
@@ -111,7 +127,7 @@ export default class Robot {
             command.print();
         }
 
-        this.currentCoordinates = new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y);
+        this.currentCoordinates = new Coordinates(x, y);
         // this.traversed.push(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y));
         this.addTraversed();
 

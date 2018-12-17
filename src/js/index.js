@@ -40,7 +40,7 @@ function runRobot(initialXY, commands, robotConfig, DEBUG) {
         robot.command(cmd);
     });
 
-    console.log('=> Cleaned: ' + robot.uniquePlacesCleaned);
+    console.log('=> Cleaned: ' + robot.getUniquePlacesCleaned());
 
     /**
      * And finally lets see which coordinates the robot did traverse
@@ -71,13 +71,23 @@ const robotConfig = {
 };
 
 // Run without stdin
+/*
 runRobot('1 2', [
-    'S 4',
-    'N 1',
-    'N 4'
+    'S 3',
+    'S 1',
+    'E 2',
+    'N 2',
+    'W 1',
+    'N 3',
 ], robotConfig, DEBUG);
+*/
 
-
+runRobot('1 2', [
+    'S 3',
+    'S 1',
+    'E 2',
+    'N 2',
+], robotConfig, DEBUG);
 /*
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
