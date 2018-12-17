@@ -1,5 +1,6 @@
 import leftPad from './leftpad';
 import Square from './Square';
+import Compass from './Compass';
 
 /*
 const serNos = [6934, 23111, 23114, 1001, 211161, 500, 3000, 4];
@@ -13,3 +14,6 @@ partEl.innerHTML = strList;
 
 let s = new Square();
 console.log(s.do(5));
+
+let compass = new Compass();
+compass.print();
