@@ -47,10 +47,12 @@ function runRobot(initialX, initialY, commands, DEBUG) {
     }
 }
 
-
-const DEBUG = false;
+const DEBUG = true;
 runRobot(11, 12, [
     'E 2',
     'N 1',
-    'N 2'
+    'W 2',
+    'S 1',
+    'E 2',
+    'E 2',
 ], DEBUG);

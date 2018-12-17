@@ -24,13 +24,33 @@ export default class Robot {
 
         this.command = this.command.bind(this);
         this.printTraversed = this.printTraversed.bind(this);
+        this.addPlaceCleaned = this.addPlaceCleaned.bind(this);
+    }
+
+    addPlaceCleaned(currentCoordinate, command) {
+        let placeAlreadyCleaned = false;
+
+        this.traversed.forEach( cleanedCoordinate => {
+            if( (currentCoordinate.x == cleanedCoordinate.x) && (currentCoordinate.y === cleanedCoordinate.y) ) {
+                placeAlreadyCleaned = true;
+            }
+            console.log('Comparing ', currentCoordinate.x, cleanedCoordinate.x, currentCoordinate.y, cleanedCoordinate.y);
+        });
+
+        console.log('placeAlreadyCleaned ', placeAlreadyCleaned);
+        if( ! placeAlreadyCleaned) {
+            this.placesCleaned += command.steps;
+        }
+
     }
 
     command(command) {
         this.direction = command.direction;
-        this.placesCleaned += command.steps;
         var compassAxis = this.compass.mapPoleToAxis(command.direction);
 
+        /**
+         * Move Robot on the correct axis
+         */
         if (compassAxis.axis === 'Y') {
             this.currentCoordinates.y = (compassAxis.direction === '+') ? this.currentCoordinates.y + command.steps : this.currentCoordinates.y - command.steps;
         }
@@ -39,12 +59,17 @@ export default class Robot {
             this.currentCoordinates.x = (compassAxis.direction === '+') ? this.currentCoordinates.x + command.steps : this.currentCoordinates.x - command.steps;
         }
 
+        this.addPlaceCleaned(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y), command);
+
         if(this.debug) {
             command.print();
         }
 
         this.currentCoordinates = new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y);
         this.traversed.push(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y));
+        // this.placesCleaned += command.steps;
+
+
         if(this.debug) {
             this.currentCoordinates.print();
         }
