@@ -17,7 +17,6 @@ export default class Robot {
         this.robotConfig = robotConfig;
         this.debug = DEBUG;
 
-        this.uniquePlacesCleaned = 0;
         this.previousCoordinates = new Coordinates(initialCoordinates.x, initialCoordinates.y);
         this.currentCoordinates = new Coordinates(initialCoordinates.x, initialCoordinates.y);
         this.direction = 'E';
@@ -26,28 +25,12 @@ export default class Robot {
 
         this.command = this.command.bind(this);
         this.printTraversed = this.printTraversed.bind(this);
-        this.addPlaceCleaned = this.addPlaceCleaned.bind(this);
         this.addTraversed = this.addTraversed.bind(this);
         this.getUniquePlacesCleaned = this.getUniquePlacesCleaned.bind(this);
     }
 
     getUniquePlacesCleaned() {
         return this.traversed.length;
-    }
-
-    addPlaceCleaned(currentCoordinate, command) {
-        let placeAlreadyCleaned = false;
-
-        this.traversed.forEach( cleanedCoordinate => {
-            if( (currentCoordinate.x == cleanedCoordinate.x) && (currentCoordinate.y === cleanedCoordinate.y) ) {
-                placeAlreadyCleaned = true;
-            }
-        });
-
-        if( ! placeAlreadyCleaned) {
-            this.uniquePlacesCleaned += command.steps;
-        }
-
     }
 
     addTraversed() {
@@ -98,7 +81,7 @@ export default class Robot {
         this.direction = command.direction;
         var compassAxis = this.compass.mapPoleToAxis(command.direction);
         this.previousCoordinates = new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y);
-        this.currentCoordinates.print();
+
         /**
          * Move Robot on the correct axis
          */
@@ -121,14 +104,11 @@ export default class Robot {
             this.currentCoordinates.x = x;
         }
 
-        this.addPlaceCleaned(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y), command);
-
         if(this.debug) {
             command.print();
         }
 
         this.currentCoordinates = new Coordinates(x, y);
-        // this.traversed.push(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y));
         this.addTraversed();
 
         if(this.debug) {

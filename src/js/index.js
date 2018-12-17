@@ -50,7 +50,7 @@ function runRobot(initialXY, commands, robotConfig, DEBUG) {
     }
 }
 
-const DEBUG = true;
+const DEBUG = false;
 
 /*
 // Run without stdin
@@ -63,37 +63,7 @@ runRobot(11, 12, [
     'E 2',
 ], DEBUG);
 */
-const robotConfig = {
-    xMin: -100000,
-    xMax: 100000,
-    yMin: -100000,
-    yMax: 100000
-};
 
-// Run without stdin
-/*
-runRobot('1 2', [
-    'S 3',
-    'S 1',
-    'E 2',
-    'N 2',
-    'W 1',
-    'N 3',
-], robotConfig, DEBUG);
-*/
-
-runRobot('1 2', [
-    'S 3',
-    'S 1',
-    'E 2',
-    'N 2',
-    'W 1',
-    'W 3',
-    'N 3',
-    'E 2',
-    'S 6'
-], robotConfig, DEBUG);
-/*
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
@@ -157,4 +127,4 @@ process.stdin.on('data', function (data) {
         process.exit();
     }
 });
-*/
+
