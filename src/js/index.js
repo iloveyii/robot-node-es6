@@ -1,10 +1,15 @@
+
+
+
+
+
 import Compass from './Compass';
 import Command from './Command';
 import Coordinates from './Coordinates';
 import Robot from './Robot';
 
 
-function runRobot(initialX, initialY, commands, DEBUG) {
+function runRobot(initialXY, commands, DEBUG) {
     /**
      * We need a compass to tell the Robot
      * which pole direction corresponds to which axis
@@ -17,7 +22,10 @@ function runRobot(initialX, initialY, commands, DEBUG) {
      * to start with
      * @type {Coordinates}
      */
-    const startingCoord = new Coordinates(initialX, initialY);
+    const xy = initialXY.split(' ');
+    const x = Number(xy[0]);
+    const y = Number(xy[1]);
+    const startingCoord = new Coordinates(x, y);
 
     /**
      * Lets create our robot at the specified coordinates
@@ -47,7 +55,9 @@ function runRobot(initialX, initialY, commands, DEBUG) {
     }
 }
 
-const DEBUG = true;
+const DEBUG = false;
+
+/*
 runRobot(11, 12, [
     'E 2',
     'N 1',
@@ -56,3 +66,23 @@ runRobot(11, 12, [
     'E 2',
     'E 2',
 ], DEBUG);
+*/
+
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+var input = new Array();
+var counter = 0;
+process.stdin.on('data', function (data) {
+    input.push(data.toString().trim());
+    counter++;
+    if( counter > ( Number(input[0]) +  1) ) {
+        if(DEBUG) {
+            console.log(input);
+        }
+        const initialCoordinates = (input[1]).toString().trim();
+        const commands = input.slice(2);
+        runRobot(initialCoordinates, commands, DEBUG);
+        process.exit();
+    }
+});

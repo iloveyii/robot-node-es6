@@ -34,10 +34,8 @@ export default class Robot {
             if( (currentCoordinate.x == cleanedCoordinate.x) && (currentCoordinate.y === cleanedCoordinate.y) ) {
                 placeAlreadyCleaned = true;
             }
-            console.log('Comparing ', currentCoordinate.x, cleanedCoordinate.x, currentCoordinate.y, cleanedCoordinate.y);
         });
 
-        console.log('placeAlreadyCleaned ', placeAlreadyCleaned);
         if( ! placeAlreadyCleaned) {
             this.placesCleaned += command.steps;
         }
@@ -67,8 +65,6 @@ export default class Robot {
 
         this.currentCoordinates = new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y);
         this.traversed.push(new Coordinates(this.currentCoordinates.x, this.currentCoordinates.y));
-        // this.placesCleaned += command.steps;
-
 
         if(this.debug) {
             this.currentCoordinates.print();
