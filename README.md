@@ -26,13 +26,13 @@ Once the robot gets instructions it will keep on working without any human inter
 ### Example Input
     ```
       2
-      10 22
-      E 2
-      N 1
+      1 1
+      N 3
+      W 4
     ```
 ### Example output
     ```
-      => Cleaned: 4
+      => Cleaned: 8
     ```
   
 ## Overall Structure
