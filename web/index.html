@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="Hazrat Ali" content="A PHP , VUE application">
-        <link rel="icon" href="/app/assets/img/favicon.png">
+        <link rel="icon" href="/img/favicon.png">
 
         <title>Player Electron</title>
 
@@ -18,79 +18,31 @@
         <!-- Vue -->
         <script src="https://unpkg.com/vue"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-
-        <style>
-            .channelBar {
-                position: absolute;
-                width: 98%;
-                opacity: 0.7;
-                margin: 0;
-                z-index: 100;
-                height: 120px;
-            }
-            .channelBar button {
-                border-radius: 0;
-            }
-            #buttonsRow {
-                display: none;
-            }
-            button {
-                border-radius: 0 !important;
-                padding: 1rem 1rem !important;
-            }
-            td {
-                border: none !important;
-            }
-        </style>
     </head>
-    <body style="background-color: #d9534f; height: 100vh">
+    <body style="height: 100vh">
 
-    <div class="container-fluid" id="vue-app-remote" style="height: 100vh">
+    <div class="container-fluid" id="vue-app" style="height: 100vh">
 
         <div class="row" style="height: 100vh">
             <div class="col-sm-12" style="height: 100vh">
-                <table class="table table-dark" style="height: 100vh; margin: 0">
-                    <tr>
-                        <td><button v-on:click="mute" class="btn btn-warning btn-block">Mute +</button></td>
-                        <td></td>
-                        <td><button v-on:click="unmute" class="btn btn-warning btn-block">Mute -</button></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td><button v-on:click="volumeUp" class="btn btn-success btn-block">V +</button></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td><button v-on:click="pre" class="btn btn-info btn-block">CH -</button></td>
-                        <td></td>
-                        <td><button v-on:click="next" class="btn btn-info btn-block">CH +</button></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                        <td><button v-on:click="volumeDown" class="btn btn-success btn-block">V -</button></td>
-                        <td></td>
-                    </tr>
-
-
-                    <tr>
-                        <td colspan="3">
-                            <div class="row">
-                                <div class="col-3"><button v-on:click="sleep(0)" class="btn btn-danger btn-block">X</button></div>
-                                <div class="col-3"><button v-on:click="sleep(1)" class="btn btn-danger btn-block">30</button></div>
-
-                                <div class="col-3"><button v-on:click="sleep(60)" class="btn btn-danger btn-block">1hr</button></div>
-                                <div class="col-3"><button v-on:click="sleep(120)" class="btn btn-danger btn-block">2hr</button></div>
-
-                                <div class="col-sm-12" style="padding: 3px"></div>
-                                <div class="col-6"><button v-on:click="sleep(180)" class="btn btn-danger btn-block">3hr</button></div>
-                                <div class="col-6"><button v-on:click="sleep(240)" class="btn btn-danger btn-block">4hr</button></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form>
+                            <div class="form-group">
+                                <label for="command">Name</label>
+                                <textarea rows="10" :value="form.command" class="form-control" id="command" aria-describedby="commandHelp" placeholder="Enter command"></textarea>
+                                <small id="commandHelp" class="form-text text-muted">Enter command in the format.</small>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                            <div class="form-group">
+                                <p>{{form.result}}</p>
+                            </div>
+
+
+                            <button type="submit" v-on:click="runCommand" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -105,6 +57,6 @@
     <!-- HLS Video Library-->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <!-- Vue code -->
-    <script src="./js/remote.js"></script>
+    <script src="./js/robot.js"></script>
     </body>
 </html>
