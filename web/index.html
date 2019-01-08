@@ -29,8 +29,8 @@
                     <div class="col-sm-12">
                         <form>
                             <div class="form-group">
-                                <label for="command">Name</label>
-                                <textarea rows="10" :value="form.command" class="form-control" id="command" aria-describedby="commandHelp" placeholder="Enter command"></textarea>
+                                <label for="command">Commands</label>
+                                <textarea rows="10" v-model="form.command" class="form-control" id="command" aria-describedby="commandHelp" placeholder="Enter command"></textarea>
                                 <small id="commandHelp" class="form-text text-muted">Enter command in the format.</small>
                             </div>
                             <div class="form-group">
