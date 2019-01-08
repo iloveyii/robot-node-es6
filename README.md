@@ -4,6 +4,8 @@ This a small Robot application developed in Node, ES6, JS.
 
 ![screenshot](http://robot.softhem.se/screenshot.png) 
 
+[DEMO](http://robot.softhem.se/)
+
 ## Background
 When you have many people working under the same roof, it is more likely to have the work place dirty. Therefore a care robot application is required for cleaning the work place floor.
 Once the robot gets instructions it will keep on working without any human interventions, and robot would be able to provide how many unique places has been cleaned.
