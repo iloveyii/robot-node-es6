@@ -26,20 +26,20 @@ Once the robot gets instructions it will keep on working without any human inter
   * Once transpiled with the above command, it can be run directly like `node public/bundle.js`.
   
 ### Example Input
-    ```
-    
-      2
-      1 1
-      N 3
-      W 4
-      
-    ```
+```
+
+  2
+  1 1
+  N 3
+  W 4
+  
+```
 ### Example output
-    ```
-    
-      => Cleaned: 8
-      
-    ```
+```
+
+  => Cleaned: 8
+  
+```
   
 ## Overall Structure
 
