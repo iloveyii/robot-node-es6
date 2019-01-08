@@ -27,14 +27,18 @@ Once the robot gets instructions it will keep on working without any human inter
   
 ### Example Input
     ```
+    
       2
       1 1
       N 3
       W 4
+      
     ```
 ### Example output
     ```
+    
       => Cleaned: 8
+      
     ```
   
 ## Overall Structure
@@ -42,6 +46,7 @@ Once the robot gets instructions it will keep on working without any human inter
 Below is the directory structure of the source code:
 
 ```
+
    |-public
    |--src
    |---bundle.js
@@ -58,6 +63,7 @@ Below is the directory structure of the source code:
    |-package.json
    |-webpack.config.js
    |-index.html
+   
 ```
 
 ## Requirements
