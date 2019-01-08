@@ -21,7 +21,7 @@ set timeout -1
 spawn node bundle.js \n";
 
 foreach ($arrayString as $argument) {
-    $script .= sprintf('send "%s%s";%s', $argument, '\n', "\n");
+    $script .= sprintf('send "%s%s";%s', trim($argument), '\n', "\n");
 }
 
 $script .= "expect eof\n";
